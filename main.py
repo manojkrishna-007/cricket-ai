@@ -162,8 +162,27 @@ def main():
                 else:
                     score2 += ai
                     print("AI scored", ai)
-                    
         
+        #====================RESULT====================
+        print("First innings :", score1, "/", out1)
+        print("Second innings:", score2, "/", out2)
+
+        if score1 > score2:
+
+            if first_batter == "user":
+                print("\nYOU WON! 🏆")
+            else:
+                print("\nAI WON! 🤖")
+
+        elif score2 > score1:
+
+            if second_batter == "user":
+                print("\nYOU WON! 🏆")
+            else:
+                print("\nAI WON! 🤖")
+
+        else:
+            print("\nMATCH DRAW!")
         
         
 

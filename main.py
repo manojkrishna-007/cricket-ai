@@ -14,23 +14,18 @@ def get_number(message):
 
 
 def ai_choice(history, batting):
-    # Not enough data yet -> random
     if len(history) < 3:
         return random.randint(1, 6)
 
     count = Counter(history)
 
     if batting:
-        # AI is batting.
-        # Avoid the numbers the user bowls most often.
         weights = []
 
         for n in range(1, 7):
             weights.append(max(1, 10 - count[n] * 2))
 
     else:
-        # AI is bowling.
-        # Try to bowl the number the user bats most often.
         weights = []
 
         for n in range(1, 7):
@@ -40,22 +35,10 @@ def ai_choice(history, batting):
 
 
 def main():
-
-    print("\n==============================")
-    print("       HAND CRICKET")
-    print("       YOU vs AI")
-    print("==============================")
-
-    # -----------------------------
-    # GAME SETTINGS
-    # -----------------------------
-
     wickets = int(input("\nNumber of wickets: "))
     overs = int(input("Number of overs: "))
 
-    # -----------------------------
-    # TOSS
-    # -----------------------------
+#================TOSS================
 
     print("\nTOSS")
 
@@ -75,22 +58,19 @@ def main():
     else:
         result = "odd"
 
+
     if choice == result:
         toss_winner = "user"
         print("You won the toss!")
 
         bat_or_bowl = input("Choose Bat or Bowl: ").lower()
-
     else:
         toss_winner = "ai"
         print("AI won the toss!")
 
         bat_or_bowl = random.choice(["bat", "bowl"])
         print("AI chooses to", bat_or_bowl)
-
-    # -----------------------------
-    # DECIDE FIRST INNINGS
-    # -----------------------------
+        
 
     if toss_winner == "user":
 
@@ -106,91 +86,51 @@ def main():
         else:
             first_batter = "user"
 
-    # -----------------------------
-    # AI MEMORY
-    # -----------------------------
+#================AI DATASET================
 
     user_batting = []
     user_bowling = []
 
-    # -----------------------------
-    # FIRST INNINGS
-    # -----------------------------
-
-    print("\n==============================")
-    print("       FIRST INNINGS")
-    print("==============================")
+#================First Innings================
 
     score1 = 0
     out1 = 0
-
     balls = overs * 6
 
     for ball in range(balls):
-
-        print(
-            "\nScore:",
-            score1,
-            "/",
-            out1,
-            " Ball:",
-            ball + 1,
-            "/",
-            balls
-        )
+        print()
+        print(f"Score: {score1}/{out1}  || Overs: {(ball + 1)//6}.{(balls + 1)%6}/overs")
 
         if out1 == wickets:
             break
 
+
         if first_batter == "user":
-
             user = get_number("Your batting number: ")
-
             ai = ai_choice(user_batting, False)
-
             print("AI bowls:", ai)
-
             user_batting.append(user)
-
         else:
-
             user = get_number("Your bowling number: ")
-
             ai = ai_choice(user_bowling, True)
-
             print("AI bats:", ai)
-
             user_bowling.append(user)
 
-        # -------------------------
-        # OUT OR RUNS
-        # -------------------------
 
         if user == ai:
-
             print("OUT!")
-
             out1 += 1
-
         else:
-
             if first_batter == "user":
                 score1 += user
                 print("You scored", user)
-
             else:
                 score1 += ai
                 print("AI scored", ai)
 
-    # -----------------------------
-    # SECOND INNINGS
-    # -----------------------------
+#================Second Innings================
 
     target = score1 + 1
-
-    print("\n==============================")
-    print("      SECOND INNINGS")
-    print("==============================")
 
     print("Target:", target)
 
@@ -203,82 +143,51 @@ def main():
     out2 = 0
 
     for ball in range(balls):
-
-        print(
-            "\nScore:",
-            score2,
-            "/",
-            out2,
-            " Ball:",
-            ball + 1,
-            "/",
-            balls
-        )
+        print()
+        print(f"Score: {score2}/{out2}  || Overs: {(ball + 1)//6}.{(ball + 1)%6}/{overs}")
 
         if out2 == wickets or score2 >= target:
             break
 
+
         if second_batter == "user":
-
             user = get_number("Your batting number: ")
-
             ai = ai_choice(user_batting, False)
-
             print("AI bowls:", ai)
-
             user_batting.append(user)
-
         else:
-
             user = get_number("Your bowling number: ")
-
             ai = ai_choice(user_bowling, True)
-
             print("AI bats:", ai)
-
             user_bowling.append(user)
 
+
         if user == ai:
-
             print("OUT!")
-
             out2 += 1
-
         else:
-
             if second_batter == "user":
                 score2 += user
                 print("You scored", user)
-
             else:
                 score2 += ai
                 print("AI scored", ai)
 
-    # -----------------------------
-    # RESULT
-    # -----------------------------
-
-    print("\n==============================")
-    print("          RESULT")
-    print("==============================")
+#====================RESULT====================
 
     print("First innings :", score1, "/", out1)
     print("Second innings:", score2, "/", out2)
 
     if score1 > score2:
-
         if first_batter == "user":
             print("\nYOU WON! 🏆")
         else:
             print("\nAI WON! 🤖")
-
     elif score2 > score1:
-
         if second_batter == "user":
             print("\nYOU WON! 🏆")
         else:
             print("\nAI WON! 🤖")
-
     else:
         print("\nMATCH DRAW!")
 

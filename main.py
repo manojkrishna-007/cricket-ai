@@ -32,3 +32,11 @@ def ai_choice(history, batting):
             weights.append(1 + count[n] * 2)
 
     return random.choices(range(1, 7), weights=weights)[0]
+
+
+def main():
+    wickets = int(input("Number of wickets: "))
+    overs = int(input("Number of overs: "))
+    
+
+main()

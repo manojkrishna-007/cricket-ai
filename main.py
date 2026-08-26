@@ -99,7 +99,7 @@ def main():
 
     for ball in range(balls):
         print()
-        print(f"Score: {score1}/{out1}  || Overs: {(ball + 1)//6}.{(balls + 1)%6}/overs")
+        print(f"Score: {score1}/{out1}  || Overs: {(ball + 1)//6}.{(ball + 1)%6}/overs")
 
         if out1 == wickets:
             break

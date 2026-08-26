@@ -38,5 +38,29 @@ def main():
     wickets = int(input("Number of wickets: "))
     overs = int(input("Number of overs: "))
     
+    print()
+    print("TOSS")
+    oe = input("Odd or Even: ").lower()
+    h = get_number("Enter todd number: ")
+    ai = random.randint(1, 6)
+    t = h+ai
+    if t%2 == 0:
+        result = "even"
+    else:
+        result = "odd"
+        
+    if oe == result:
+        toss_winner = "user"
+        print("You won the toss!")
+
+        bat_or_bowl = input("Choose Bat or Bowl: ").lower()
+
+    else:
+        toss_winner = "ai"
+        print("AI won the toss!")
+
+        bat_or_bowl = random.choice(["bat", "bowl"])
+        print("AI chooses to", bat_or_bowl)
+    
 
 main()

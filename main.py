@@ -99,7 +99,7 @@ def main():
 
     for ball in range(balls):
         print()
-        print(f"Score: {score1}/{out1}  || Overs: {(ball + 1)//6}.{(ball + 1)%6}/overs")
+        print(f"Score: {score1}/{out1}  || Overs: {(ball + 1)//6}.{(ball + 1)%6}/{overs}")
 
         if out1 == wickets:
             break
@@ -132,7 +132,9 @@ def main():
 
     target = score1 + 1
 
+    print("\n"*5)
     print("Target:", target)
+    print("\n"*5)
 
     if first_batter == "user":
         second_batter = "ai"

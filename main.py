@@ -119,7 +119,52 @@ def main():
                 score1 += ai
                 print("AI scored", ai)
                 
-                
+        
+        #====================SECOND INNINGS====================
         target = score1 + 1
+        print("Target:", target)
+
+        if first_batter == "user":
+            second_batter = "ai"
+        else:
+            second_batter = "user"
+            
+        score2 = 0
+        out2 = 0
+
+        for ball in range(balls):
+            print()
+            print(f"Score: {score2}/{out2}  ||  Ball: {ball + 1}/{balls}")
+
+            if out2 == wickets or score2 >= target:
+                break
+
+
+            if second_batter == "user":
+                user = get_number("Your batting number: ")
+                ai = ai_choice(user_batting, False)
+                print("AI bowls:", ai)
+                user_batting.append(user)
+            else:
+                user = get_number("Your bowling number: ")
+                ai = ai_choice(user_bowling, True)
+                print("AI bats:", ai)
+                user_bowling.append(user)
+
+
+            if user == ai:
+                print("OUT!")
+                out2 += 1
+            else:
+                if second_batter == "user":
+                    score2 += user
+                    print("You scored", user)
+                else:
+                    score2 += ai
+                    print("AI scored", ai)
+                    
+        
+        
+        
 
 main()

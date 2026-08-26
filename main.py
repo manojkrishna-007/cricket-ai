@@ -38,6 +38,7 @@ def main():
     wickets = int(input("Number of wickets: "))
     overs = int(input("Number of overs: "))
     
+    #====================TOSS====================
     print()
     print("TOSS")
     oe = input("Odd or Even: ").lower()
@@ -61,6 +62,64 @@ def main():
 
         bat_or_bowl = random.choice(["bat", "bowl"])
         print("AI chooses to", bat_or_bowl)
+        
+    if toss_winner == "user":
+
+        if bat_or_bowl == "bat":
+            first_batter = "user"
+        else:
+            first_batter = "ai"
+
+    else:
+
+        if bat_or_bowl == "bat":
+            first_batter = "ai"
+        else:
+            first_batter = "user"
+            
+            
+    #====================AI DATASET====================
+    user_batting = []
+    user_bowling = []
     
+    #====================FIRST INNINGS====================
+    score1 = 0
+    out1 = 0
+
+    balls = overs * 6
+
+    for ball in range(balls):
+        print()
+        print(f"Score: {score1}/{out1}  ||  Ball: {ball + 1}/{balls}")
+        
+        if out1 == wickets:
+            break
+
+
+        if first_batter == "user":
+            user = get_number("Your batting number: ")
+            ai = ai_choice(user_batting, False)
+            print("AI bowls:", ai)
+            user_batting.append(user)
+        else:
+            user = get_number("Your bowling number: ")
+            ai = ai_choice(user_bowling, True)
+            print("AI bats:", ai)
+            user_bowling.append(user)
+            
+            
+        if user == ai:
+            print("OUT!")
+            out1 += 1
+        else:
+            if first_batter == "user":
+                score1 += user
+                print("You scored", user)
+            else:
+                score1 += ai
+                print("AI scored", ai)
+                
+                
+        target = score1 + 1
 
 main()
